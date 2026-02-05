@@ -6,9 +6,9 @@
     <title>Blue Lotus - Sayaji Hotel | Food Menu & Table Booking</title>
     <style>
         :root {
-            --color-dark: #1a1a1a; /* Deep Charcoal/Black */
-            --color-accent: #ff8c00; /* Vibrant Orange/Amber */
-            --color-text-light: #f5f5f5; /* Off-White */
+            --color-dark: #1a1a1a; 
+            --color-accent: #ff8c00; 
+            --color-text-light: #f5f5f5; 
             --color-text-gray: #aaaaaa;
         }
 
@@ -19,37 +19,40 @@
             background-color: var(--color-dark);
             color: var(--color-text-light);
             line-height: 1.6;
+            overflow-x: hidden; /* Prevent side-scrolling */
         }
 
+        /* --- Header Fixes --- */
         header {
             background-color: var(--color-dark);
-            padding: 20px 5%;
+            padding: 15px 5%;
             border-bottom: 3px solid var(--color-accent);
+        }
+
+        .header-container {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrap on small screens */
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
         }
 
         nav a {
             color: var(--color-text-light);
             text-decoration: none;
-            margin-right: 25px;
             font-weight: bold;
+            font-size: 0.9em;
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--color-accent);
-        }
+        nav a:hover { color: var(--color-accent); }
 
-        h1, h2, h3 {
-            color: var(--color-text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .logo {
-            font-size: 2em;
-            font-weight: 900;
-        }
-
+        .logo { font-size: 1.5em; font-weight: 900; line-height: 1; }
         .logo span {
             color: var(--color-accent);
             font-size: 0.5em;
@@ -58,50 +61,28 @@
             letter-spacing: 1px;
         }
 
-        section {
-            padding: 50px 5%;
-            margin-bottom: 20px;
-        }
-
-        /* --- Hero Section Styling --- */
+        /* --- Hero Section Fixes --- */
         #home {
-            min-height: 400px;
-            background: url('restaurant_interior.jpg') no-repeat center center/cover; /* Placeholder image */
+            min-height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
+            padding: 20px;
         }
 
-        #home::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-        }
+        .welcome-msg { font-size: 2.5em; font-weight: 900; margin-bottom: 5px; }
+        .hero-content h1 { font-size: 1.8em; color: var(--color-accent); margin: 10px 0 20px 0; }
+        .hero-content p { font-size: 1.1em; margin-bottom: 30px; padding: 0 10px; }
 
-        .hero-content { z-index: 1; }
-        
-        .welcome-msg {
-            font-size: 4em;
-            font-weight: 900;
-            color: var(--color-text-light);
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px #000;
+        .btn-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically on mobile */
+            gap: 15px;
+            align-items: center;
         }
-
-        .hero-content h1 { 
-            font-size: 3em; 
-            margin-top: 0;
-            margin-bottom: 10px; 
-            color: var(--color-accent); 
-        }
-
-        .hero-content p { font-size: 1.2em; margin-bottom: 40px; }
 
         .btn {
             background-color: var(--color-accent);
@@ -110,171 +91,111 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            margin: 0 10px;
-            transition: background-color 0.3s, transform 0.2s;
+            width: 80%; /* Wider buttons for easy tapping */
+            max-width: 250px;
+            transition: 0.3s;
             border: none;
             cursor: pointer;
         }
 
-        .btn:hover { background-color: #ffaa33; transform: translateY(-2px); }
+        /* --- Menu Selection (Horizontal Scroll on Mobile) --- */
+        .menu-selection { 
+            display: flex; 
+            justify-content: flex-start; 
+            overflow-x: auto; /* Scrollable filters */
+            padding: 10px 5%;
+            margin-bottom: 20px;
+            gap: 10px;
+            -webkit-overflow-scrolling: touch;
+        }
 
-        /* --- Menu Section Styling --- */
-        .menu-selection { display: flex; justify-content: center; margin-bottom: 30px; }
+        .menu-selection::-webkit-scrollbar { display: none; } /* Hide scrollbar for clean look */
+
         .menu-selection label {
+            flex: 0 0 auto; /* Prevent labels from shrinking */
             background-color: var(--color-dark);
-            color: var(--color-text-light);
-            padding: 12px 25px;
-            margin: 0 5px;
+            padding: 10px 15px;
             border: 2px solid var(--color-accent);
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.85em;
             font-weight: bold;
             white-space: nowrap;
         }
 
-        .menu-selection input[type="radio"] { display: none; }
         .menu-selection input[type="radio"]:checked + label {
             background-color: var(--color-accent);
             color: var(--color-dark);
         }
 
+        /* --- Menu Grid Fixes --- */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 20px;
+            padding: 0 5%;
         }
 
         .menu-category {
             background-color: rgba(255, 255, 255, 0.05);
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             border-top: 5px solid var(--color-accent);
         }
 
-        .menu-category h3 { color: var(--color-accent); margin-top: 0; border-bottom: 1px solid var(--color-accent); padding-bottom: 10px; margin-bottom: 20px; }
-
-        /* Menu Item Checkbox Styles - MODIFIED FOR ALIGNMENT */
         .menu-item-wrapper {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px dotted var(--color-text-gray);
-            cursor: pointer;
+            border-bottom: 1px dotted #444;
         }
 
-        .menu-item-wrapper input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--color-accent);
-            border-radius: 3px;
-            margin-right: 15px;
-            cursor: pointer;
-            position: relative;
-            top: 1px;
-            flex-shrink: 0;
-            transition: background-color 0.1s;
+        .item-details { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start;
+            flex-grow: 1; 
+            gap: 10px;
         }
 
-        .menu-item-wrapper input[type="checkbox"]:checked {
-            background-color: var(--color-accent);
-            border-color: var(--color-accent);
-        }
+        .item-name { font-size: 0.95em; font-weight: bold; }
+        .item-price { color: var(--color-accent); font-weight: bold; white-space: nowrap; }
 
-        .menu-item-wrapper input[type="checkbox"]:checked::after {
-            content: '✓';
-            color: var(--color-dark);
-            font-size: 14px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-        }
-        
-        .item-details {
-            /* Use flex for main details section */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-grow: 1; /* Allow it to take up all available space */
-            min-width: 0; /* Important for flex items with nowrap content */
-        }
-
-        .item-name { 
-            font-weight: bold; 
-            margin-right: 15px;
-            /* Allow name to truncate if too long, saving space for price */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 80%; /* Give it ample space */
-        }
-
-        .item-price { 
-            color: var(--color-accent); 
-            font-weight: bold; 
-            flex-shrink: 0; /* Ensure price doesn't shrink */
-        }
-
-        /* --- Order Summary Styling --- */
+        /* --- Sticky Footer Summary --- */
         #order-summary-container {
-            position: sticky;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.9);
+            position: sticky; bottom: 0;
+            background: rgba(0,0,0,0.95);
             border-top: 3px solid var(--color-accent);
-            padding: 15px 5%;
-            z-index: 10;
+            padding: 10px 5%;
+            z-index: 100;
         }
 
-        #order-summary {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.1em;
+        #order-summary { display: flex; justify-content: space-between; align-items: center; }
+        #total-price { font-size: 1.2em; color: var(--color-accent); font-weight: bold; }
+
+        /* --- Form Fixes --- */
+        .booking-form { padding: 20px; margin: 0 5%; background: rgba(255,255,255,0.05); border-radius: 8px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; box-sizing: border-box; /* Crucial for mobile sizing */
+            padding: 12px; margin-top: 5px; background: #222; border: 1px solid #444; color: #fff;
         }
 
-        #order-summary h4 {
-            color: var(--color-accent);
-            margin: 0;
+        /* --- Desktop Responsive Adjustments --- */
+        @media (min-width: 768px) {
+            .btn-container { flex-direction: row; justify-content: center; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+            .welcome-msg { font-size: 4em; }
+            .hero-content h1 { font-size: 3em; }
+            .menu-selection { justify-content: center; overflow: visible; }
+            .logo { font-size: 2em; }
         }
-
-        #selected-items-list {
-            list-style: none;
-            padding: 0;
-            margin: 5px 0 0 0;
-            display: inline-flex;
-            flex-wrap: wrap;
-        }
-        
-        #selected-items-list li {
-            margin-right: 20px;
-            color: var(--color-text-light);
-            font-size: 0.9em;
-        }
-
-        #total-price {
-            font-size: 1.5em;
-            color: var(--color-accent);
-            font-weight: bold;
-        }
-
-        /* --- Booking Form & Footer Styling --- */
-        .booking-form { max-width: 600px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 8px; border: 1px solid var(--color-accent); }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--color-text-gray); border-radius: 4px; background-color: var(--color-dark); color: var(--color-text-light); box-sizing: border-box; }
-        footer { background-color: #000; text-align: center; padding: 30px 5%; font-size: 0.9em; color: var(--color-text-gray); }
-        .fine-print { color: #ff6347; margin-top: 15px; font-size: 0.8em; }
-
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="header-container">
             <div class="logo">SAYAJI HOTEL<span>BLUE LOTUS</span></div>
             <nav>
                 <a href="#home">Home</a>
@@ -287,294 +208,105 @@
     <section id="home">
         <div class="hero-content">
             <div class="welcome-msg">WELCOME</div>
-            <h1>BLUE LOTUS at Sayaji Hotel</h1>
-            <p>Where Culinary Journeys Begin. Experience the finest dining in Kolhapur.</p>
-            <a href="#menu" class="btn">VIEW MENU</a>
-            <a href="#booking" class="btn">BOOK A TABLE</a>
+            <h1>BLUE LOTUS</h1>
+            <p>Experience the finest dining in Kolhapur.</p>
+            <div class="btn-container">
+                <a href="#menu" class="btn">VIEW MENU</a>
+                <a href="#booking" class="btn">BOOK A TABLE</a>
+            </div>
         </div>
     </section>
 
     <section id="menu">
-        <h2>Our Menu</h2>
-        <p style="text-align: center; color: var(--color-accent); font-weight: bold;">
-            Please note: Government taxes & service charge applicable | Subject to availability.
-        </p>
-
+        <h2 style="text-align: center;">Our Menu</h2>
         <div class="menu-selection">
             <input type="radio" id="filter-all" name="menu-filter" value="all" checked onchange="filterMenu('all')">
             <label for="filter-all">All Menu</label>
-            
             <input type="radio" id="filter-breakfast" name="menu-filter" value="breakfast" onchange="filterMenu('breakfast')">
             <label for="filter-breakfast">Breakfast</label>
-            
             <input type="radio" id="filter-alltime" name="menu-filter" value="alltime" onchange="filterMenu('alltime')">
-            <label for="filter-alltime">All Time Favorites</label>
-            
+            <label for="filter-alltime">Favorites</label>
             <input type="radio" id="filter-mains" name="menu-filter" value="mains" onchange="filterMenu('mains')">
-            <label for="filter-mains">Indian Mains & Appetizers</label>
+            <label for="filter-mains">Indian Mains</label>
         </div>
 
         <div class="menu-grid" id="menu-container">
             <div class="menu-category" data-category="all">
-                <h3>Beverages (06:30 am – 11:00 pm)</h3>
+                <h3>Beverages</h3>
                 <label class="menu-item-wrapper">
                     <input type="checkbox" name="menu_item" data-price="150" data-name="Tea" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Tea</span>
-                        <span class="item-price">₹ 150</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="150" data-name="Coffee" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Coffee</span>
-                        <span class="item-price">₹ 150</span>
-                    </div>
+                    <div class="item-details"><span class="item-name">Tea</span><span class="item-price">₹ 150</span></div>
                 </label>
                 <label class="menu-item-wrapper">
                     <input type="checkbox" name="menu_item" data-price="245" data-name="Milkshake" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Milkshake</span>
-                        <span class="item-price">₹ 245</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="200" data-name="Lassi (Sweet / Salted)" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Lassi (Sweet / Salted)</span>
-                        <span class="item-price">₹ 200</span>
-                    </div>
+                    <div class="item-details"><span class="item-name">Milkshake</span><span class="item-price">₹ 245</span></div>
                 </label>
             </div>
-
-            <div class="menu-category" data-category="breakfast all">
-                <h3>Breakfast (07:00 am – 10:30 am)</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="175" data-name="Missal Pav" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Missal Pav</span>
-                        <span class="item-price">₹ 175</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="265" data-name="Eggs to Order" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Eggs to Order</span>
-                        <span class="item-price">₹ 265</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="175" data-name="Pancakes" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Pancakes</span>
-                        <span class="item-price">₹ 175</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="265" data-name="South Indian (Dosa/Idli)">
-                    <div class="item-details">
-                        <span class="item-name">South Indian (Dosa/Idli/Upma, etc.)</span>
-                        <span class="item-price">₹ 265</span>
-                    </div>
-                </label>
-            </div>
-
-            <div class="menu-category" data-category="alltime all">
-                <h3>All Time Favorite (10:30 am – 11:00 pm)</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="365" data-name="Chicken Burger" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Chicken Burger</span>
-                        <span class="item-price">₹ 365</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="315" data-name="Ultimate Vegetable Burger" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Ultimate Vegetable Burger</span>
-                        <span class="item-price">₹ 315</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="265" data-name="Chicken Grilled Sandwich" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Chicken Grilled Sandwich</span>
-                        <span class="item-price">₹ 265</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="195" data-name="French Fries / Smiley Potato" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">French Fries / Smiley Potato</span>
-                        <span class="item-price">₹ 195</span>
-                    </div>
-                </label>
-            </div>
-
+            
             <div class="menu-category" data-category="mains all">
-                <h3>Indian Mains (12:30 pm – 11:00 pm)</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="495" data-name="Choice of Paneer" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Choice of Paneer (Makhni, Tikka Masala, etc.)</span>
-                        <span class="item-price">₹ 495</span>
-                    </div>
-                </label>
+                <h3>Mains</h3>
                 <label class="menu-item-wrapper">
                     <input type="checkbox" name="menu_item" data-price="565" data-name="Butter Chicken" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Butter Chicken</span>
-                        <span class="item-price">₹ 565</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="565" data-name="Murgh Dum Biryani" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Murgh Dum Biryani</span>
-                        <span class="item-price">₹ 565</span>
-                    </div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="100" data-name="Naan (Plain / Butter / Garlic)" onchange="updateOrderSummary()">
-                    <div class="item-details">
-                        <span class="item-name">Naan (Plain / Butter / Garlic)</span>
-                        <span class="item-price">₹ 100</span>
-                    </div>
+                    <div class="item-details"><span class="item-name">Butter Chicken</span><span class="item-price">₹ 565</span></div>
                 </label>
             </div>
         </div>
     </section>
 
-    <hr style="border-color: var(--color-accent);">
-
     <div id="order-summary-container">
         <div id="order-summary">
-            <div>
-                <h4>Selected Menu Items:</h4>
-                <ul id="selected-items-list">
-                    <li>No items selected.</li>
-                </ul>
-            </div>
-            <div>
-                <span style="font-size: 1.2em;">TOTAL:</span>
-                <span id="total-price">₹ 0</span>
-            </div>
+            <span style="font-weight: bold; color: var(--color-accent);">Total:</span>
+            <span id="total-price">₹ 0</span>
         </div>
     </div>
-    
-    <hr style="border-color: var(--color-accent);">
-
 
     <section id="booking">
-        <h2>Reserve Your Table</h2>
+        <h2 style="text-align: center;">Reserve Your Table</h2>
         <div class="booking-form">
-            <form action="/submit_booking" method="POST">
+            <form id="google-sheet-form" action="YOUR_APPS_SCRIPT_URL" method="POST">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <label>Full Name</label>
+                    <input type="text" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <label>Date</label>
+                    <input type="date" name="date" required>
                 </div>
-                <div class="form-group">
-                    <label for="party-size">Party Size</label>
-                    <select id="party-size" name="party-size" required>
-                        <option value="1">1 Person</option>
-                        <option value="2" selected>2 People</option>
-                        <option value="3">3 People</option>
-                        <option value="4">4 People</option>
-                        <option value="5+">5+ People</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="time">Time (07:00 am – 10:30 pm)</label>
-                    <select id="time" name="time" required>
-                        <option value="08:00">08:00 AM (Breakfast)</option>
-                        <option value="12:30">12:30 PM (Lunch)</option>
-                        <option value="19:30">07:30 PM (Dinner)</option>
-                        <option value="21:00">09:00 PM (Dinner)</option>
-                    </select>
-                    <small style="color: var(--color-text-gray);">Table bookings are available during main service hours.</small>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Special Requests / Allergies</label>
-                    <textarea id="notes" name="notes" rows="3" placeholder="Please inform us of any food allergies."></textarea>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">CONFIRM RESERVATION & ORDER</button>
+                
+                <input type="hidden" id="hidden-total" name="total_price">
+                <input type="hidden" id="hidden-items" name="items">
+
+                <button type="submit" class="btn" style="width: 100%; max-width: none; margin: 20px 0 0 0;">CONFIRM</button>
             </form>
         </div>
     </section>
 
-    <footer>
-        <p>SAYAJI HOTEL | BLUE LOTUS Restaurant</p>
-        <p>123 Anywhere St., Any City | 123-456-7890</p>
-        <p class="fine-print">Government taxes & service charge applicable. Subject to availability.</p>
-        <p class="fine-print">Please help us to serve you better by letting us know if you are allergic to any food.</p>
-        <p>&copy; 2025 Sayaji Hotel. All rights reserved.</p>
-    </footer>
-
     <script>
-        // Function to filter the menu items based on radio button selection
+        // Copy your existing JS functions here (filterMenu, updateOrderSummary, form submission)
         function filterMenu(category) {
-            const menuItems = document.querySelectorAll('#menu-container .menu-category');
-            
-            menuItems.forEach(item => {
-                const itemCategories = item.getAttribute('data-category').split(' ');
-                
-                if (category === 'all' || itemCategories.includes(category)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+            const categories = document.querySelectorAll('.menu-category');
+            categories.forEach(cat => {
+                const tags = cat.getAttribute('data-category').split(' ');
+                cat.style.display = (category === 'all' || tags.includes(category)) ? 'block' : 'none';
             });
         }
 
-        // Function to update the Order Summary (total price and selected items list)
         function updateOrderSummary() {
-            // Get all checked checkboxes
             const checkboxes = document.querySelectorAll('input[name="menu_item"]:checked');
-            let totalPrice = 0;
-            const selectedList = document.getElementById('selected-items-list');
-            selectedList.innerHTML = ''; // Clear previous list
-
-            if (checkboxes.length === 0) {
-                selectedList.innerHTML = '<li>No items selected.</li>';
-            } else {
-                checkboxes.forEach(checkbox => {
-                    // For checkboxes, quantity is always 1
-                    const quantity = 1; 
-                    const pricePerUnit = parseInt(checkbox.getAttribute('data-price'));
-                    const name = checkbox.getAttribute('data-name');
-                    
-                    totalPrice += pricePerUnit * quantity;
-
-                    const listItem = document.createElement('li');
-                    // Display 1x for clarity, but calculate based on 1
-                    listItem.textContent = `${quantity}x ${name} (₹ ${pricePerUnit})`;
-                    selectedList.appendChild(listItem);
-                });
-            }
-
-            // Display the final total
-            document.getElementById('total-price').textContent = `₹ ${totalPrice}`;
+            let total = 0;
+            let items = [];
+            checkboxes.forEach(cb => {
+                total += parseInt(cb.getAttribute('data-price'));
+                items.push(cb.getAttribute('data-name'));
+            });
+            document.getElementById('total-price').textContent = `₹ ${total}`;
+            document.getElementById('hidden-total').value = total;
+            document.getElementById('hidden-items').value = items.join(', ');
         }
-
-
-        // Initialize filters and order summary on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            filterMenu('all');
-            updateOrderSummary(); 
-        });
     </script>
-
 </body>
 </html>
