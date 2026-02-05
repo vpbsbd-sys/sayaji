@@ -3,128 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blue Lotus - Sayaji Hotel | Food Menu & Table Booking</title>
+    <title>Blue Lotus - Sayaji Hotel | Complete Menu & Booking</title>
     <style>
         :root {
             --color-dark: #1a1a1a; 
             --color-accent: #ff8c00; 
             --color-text-light: #f5f5f5; 
-            --color-text-gray: #aaaaaa;
         }
 
+        * { box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
             margin: 0; padding: 0;
             background-color: var(--color-dark);
             color: var(--color-text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
+            line-height: 1.4;
         }
 
-        /* --- Header Fixes --- */
-        header {
-            background-color: var(--color-dark);
-            padding: 15px 5%;
-            border-bottom: 3px solid var(--color-accent);
-        }
+        /* --- Header & Hero --- */
+        header { background: var(--color-dark); padding: 15px 5%; border-bottom: 3px solid var(--color-accent); position: sticky; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.2em; font-weight: 900; }
+        .logo span { color: var(--color-accent); font-size: 0.6em; display: block; }
 
-        .header-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo { font-size: 1.5em; font-weight: 900; text-align: center; }
-        .logo span { color: var(--color-accent); font-size: 0.5em; display: block; letter-spacing: 1px; }
-
-        nav { display: flex; gap: 15px; }
-        nav a { color: var(--color-text-light); text-decoration: none; font-weight: bold; font-size: 0.9em; }
-
-        /* --- Hero Section Fixes --- */
         #home {
-            min-height: 70vh;
-            padding: 40px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 80px 20px;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('restaurant_interior.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') center/cover;
         }
+        .btn-wrap { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 25px; }
+        .btn { background: var(--color-accent); color: #000; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; width: 260px; text-align: center; border: none; cursor: pointer; }
 
-        .welcome-msg { font-size: 2.5em; font-weight: 900; }
-        .hero-content h1 { font-size: 1.8em; color: var(--color-accent); margin: 10px 0 20px; }
-        
-        .btn-container { display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .btn {
-            background-color: var(--color-accent);
-            color: var(--color-dark);
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            width: 200px;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        /* --- Menu Filters --- */
+        /* --- Menu Section --- */
         .menu-selection { 
-            display: flex; 
-            overflow-x: auto; 
-            padding: 10px 5%; 
-            gap: 10px;
-            scrollbar-width: none;
+            display: flex; overflow-x: auto; padding: 20px 5%; gap: 10px; 
+            background: #111; position: sticky; top: 70px; z-index: 999;
         }
-        .menu-selection label {
-            flex: 0 0 auto;
-            background: var(--color-dark);
-            padding: 10px 15px;
-            border: 2px solid var(--color-accent);
-            border-radius: 5px;
-            font-size: 0.85em;
-            cursor: pointer;
-        }
-        .menu-selection input[type="radio"]:checked + label {
-            background: var(--color-accent);
-            color: var(--color-dark);
-        }
+        .menu-selection label { flex: 0 0 auto; border: 1px solid var(--color-accent); padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 0.9em; }
         .menu-selection input { display: none; }
+        .menu-selection input:checked + label { background: var(--color-accent); color: #000; }
 
-        /* --- Menu Content --- */
         .menu-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px 5%; }
-        .menu-category { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border-top: 5px solid var(--color-accent); }
-        .menu-item-wrapper { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px dotted #444; }
-        .item-details { display: flex; justify-content: space-between; flex-grow: 1; padding-left: 10px; }
-        .item-price { color: var(--color-accent); font-weight: bold; }
+        .menu-category { background: #222; padding: 15px; border-radius: 8px; border-left: 4px solid var(--color-accent); }
+        .cat-title { color: var(--color-accent); margin-top: 0; margin-bottom: 5px; font-size: 1.1em; }
+        .cat-time { color: #aaa; font-size: 0.8em; display: block; margin-bottom: 10px; border-bottom: 1px solid #444; padding-bottom: 5px; }
+        .menu-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dotted #333; align-items: flex-start; }
+        .item-info { flex: 1; padding-left: 10px; }
+        .item-name { display: block; font-weight: bold; }
+        .item-price { font-weight: bold; color: var(--color-accent); margin-left: 10px; }
 
-        /* --- Sticky Footer --- */
-        #order-summary-container {
-            position: sticky; bottom: 0;
-            background: rgba(0,0,0,0.95);
-            border-top: 3px solid var(--color-accent);
-            padding: 12px 5%;
-            z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        /* --- Booking Form --- */
-        .booking-form { padding: 30px 5%; }
-        .form-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+        /* --- Booking Form & Summary --- */
+        #final-booking { padding: 40px 5%; background: #111; border-top: 2px solid var(--color-accent); }
+        .form-container { max-width: 500px; margin: 0 auto; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-size: 0.9em; }
-        .form-group input { width: 100%; padding: 12px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px; box-sizing: border-box; }
+        .form-group input { width: 100%; padding: 12px; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff; }
 
-        /* --- Desktop Queries --- */
+        .summary-box { 
+            background: #000; padding: 15px; border: 1px solid var(--color-accent); 
+            margin-bottom: 20px; display: flex; justify-content: space-between; 
+            font-weight: bold; font-size: 1.2em; border-radius: 5px;
+        }
+
         @media (min-width: 768px) {
-            .header-container { flex-direction: row; justify-content: space-between; }
-            .welcome-msg { font-size: 4em; }
-            .hero-content h1 { font-size: 3em; }
-            .btn-container { flex-direction: row; justify-content: center; }
+            .btn-wrap { flex-direction: row; justify-content: center; }
             .menu-grid { grid-template-columns: 1fr 1fr; }
-            .menu-selection { justify-content: center; }
         }
     </style>
 </head>
@@ -133,135 +76,135 @@
     <header>
         <div class="header-container">
             <div class="logo">SAYAJI HOTEL<span>BLUE LOTUS</span></div>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#menu">Menu</a>
-                <a href="#booking">Book Table</a>
-            </nav>
+            <div style="font-size: 0.8em;">KOLHAPUR</div>
         </div>
     </header>
 
     <section id="home">
-        <div class="hero-content">
-            <div class="welcome-msg">WELCOME</div>
-            <h1>BLUE LOTUS</h1>
-            <p>Experience the finest dining in Kolhapur.</p>
-            <div class="btn-container">
-                <a href="#menu" class="btn">VIEW MENU</a>
-                <a href="#booking" class="btn">BOOK A TABLE</a>
-            </div>
+        <h1 style="font-size: 2.5em; margin: 0;">WELCOME</h1>
+        <p style="color: var(--color-accent); font-weight: bold;">Where Culinary Journeys Begin</p>
+        <div class="btn-wrap">
+            <a href="#menu" class="btn">VIEW MENU</a>
+            <a href="#final-booking" class="btn">BOOK A TABLE</a>
         </div>
     </section>
 
     <section id="menu">
-        <h2 style="text-align: center; margin-top: 40px;">Our Menu</h2>
         <div class="menu-selection">
-            <input type="radio" id="f-all" name="m-filter" value="all" checked onchange="filterMenu('all')">
-            <label for="f-all">All</label>
-            <input type="radio" id="f-bev" name="m-filter" value="bev" onchange="filterMenu('bev')">
-            <label for="f-bev">Beverages</label>
-            <input type="radio" id="f-main" name="m-filter" value="main" onchange="filterMenu('main')">
-            <label for="f-main">Mains</label>
+            <input type="radio" id="all" name="cat" checked onclick="filter('all')"><label for="all">All Menu</label>
+            <input type="radio" id="bev" name="cat" onclick="filter('beverages')"><label for="bev">Beverages</label>
+            <input type="radio" id="br" name="cat" onclick="filter('breakfast')"><label for="br">Breakfast</label>
+            <input type="radio" id="fav" name="cat" onclick="filter('favorites')"><label for="fav">Favorites</label>
+            <input type="radio" id="main" name="cat" onclick="filter('mains')"><label for="main">Indian Mains</label>
         </div>
 
         <div class="menu-grid">
-            <div class="menu-category" data-cat="bev all">
-                <h3>Beverages</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" data-price="150" data-name="Tea" onchange="updateSummary()">
-                    <div class="item-details"><span>Tea</span><span class="item-price">₹ 150</span></div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" data-price="245" data-name="Milkshake" onchange="updateSummary()">
-                    <div class="item-details"><span>Milkshake</span><span class="item-price">₹ 245</span></div>
-                </label>
+            <div class="menu-category" data-cat="beverages">
+                <h3 class="cat-title">Beverages</h3>
+                <span class="cat-time">06:30 AM - 11:00 PM</span>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="150" data-name="Tea" onchange="calc()"><div class="item-info"><span class="item-name">Tea</span></div><span class="item-price">₹ 150</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="150" data-name="Coffee" onchange="calc()"><div class="item-info"><span class="item-name">Coffee</span></div><span class="item-price">₹ 150</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="245" data-name="Milkshake" onchange="calc()"><div class="item-info"><span class="item-name">Milkshake</span></div><span class="item-price">₹ 245</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="200" data-name="Lassi" onchange="calc()"><div class="item-info"><span class="item-name">Lassi (Sweet / Salted)</span></div><span class="item-price">₹ 200</span></div>
             </div>
 
-            <div class="menu-category" data-cat="main all">
-                <h3>Indian Mains</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" data-price="565" data-name="Butter Chicken" onchange="updateSummary()">
-                    <div class="item-details"><span>Butter Chicken</span><span class="item-price">₹ 565</span></div>
-                </label>
+            <div class="menu-category" data-cat="breakfast">
+                <h3 class="cat-title">Breakfast</h3>
+                <span class="cat-time">07:00 AM - 10:30 AM</span>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="175" data-name="Missal Pav" onchange="calc()"><div class="item-info"><span class="item-name">Missal Pav</span></div><span class="item-price">₹ 175</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="265" data-name="Eggs to Order" onchange="calc()"><div class="item-info"><span class="item-name">Eggs to Order</span></div><span class="item-price">₹ 265</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="265" data-name="South Indian" onchange="calc()"><div class="item-info"><span class="item-name">South Indian (Dosa/Idli/Vada)</span></div><span class="item-price">₹ 265</span></div>
+            </div>
+
+            <div class="menu-category" data-cat="favorites">
+                <h3 class="cat-title">All Time Favorites</h3>
+                <span class="cat-time">10:30 AM - 11:00 PM</span>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="365" data-name="Chicken Burger" onchange="calc()"><div class="item-info"><span class="item-name">Chicken Burger</span></div><span class="item-price">₹ 365</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="265" data-name="Veg Grilled Sandwich" onchange="calc()"><div class="item-info"><span class="item-name">Vegetable Grilled Sandwich</span></div><span class="item-price">₹ 265</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="195" data-name="French Fries" onchange="calc()"><div class="item-info"><span class="item-name">French Fries / Smiley Potato</span></div><span class="item-price">₹ 195</span></div>
+            </div>
+
+            <div class="menu-category" data-cat="mains">
+                <h3 class="cat-title">Indian Mains</h3>
+                <span class="cat-time">12:30 PM - 03:30 PM & 07:00 PM - 11:00 PM</span>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="565" data-name="Butter Chicken" onchange="calc()"><div class="item-info"><span class="item-name">Butter Chicken</span></div><span class="item-price">₹ 565</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="715" data-name="Mutton Saoji" onchange="calc()"><div class="item-info"><span class="item-name">Mutton Saoji</span></div><span class="item-price">₹ 715</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="495" data-name="Choice of Paneer" onchange="calc()"><div class="item-info"><span class="item-name">Choice of Paneer</span></div><span class="item-price">₹ 495</span></div>
+                <div class="menu-item"><input type="checkbox" class="food-item" data-price="315" data-name="Dal Tadka" onchange="calc()"><div class="item-info"><span class="item-name">Dal Tadka</span></div><span class="item-price">₹ 315</span></div>
             </div>
         </div>
     </section>
 
-    <div id="order-summary-container">
-        <span style="font-weight: bold; color: var(--color-accent);">Total Price:</span>
-        <span id="total-display" style="font-size: 1.3em; font-weight: bold;">₹ 0</span>
-    </div>
-
-    <section id="booking">
-        <h2 style="text-align: center;">Book Your Table</h2>
-        <div class="booking-form">
-            <div class="form-card">
-                <form id="orderForm" action="https://script.google.com/macros/s/AKfycbyteIo3zNTT9aM3HNsMiu6esEWxkbLplciI_NBoARnlek990FN5Y0JLNkqW3vyoLLXY/exec" method="POST">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Date of Booking</label>
-                        <input type="date" name="date" required>
-                    </div>
-
-                    <input type="hidden" id="hidden-total" name="total_price">
-                    <input type="hidden" id="hidden-items" name="items">
-
-                    <button type="submit" class="btn" id="submitBtn" style="width: 100%;">CONFIRM ORDER</button>
-                </form>
-                <p id="msg" style="display:none; text-align:center; color: #ff8c00; margin-top: 15px; font-weight: bold;">Sending to Sheet...</p>
+    <section id="final-booking">
+        <div class="form-container">
+            <h2 style="text-align: center; color: var(--color-accent); margin-bottom: 25px;">COMPLETE YOUR ORDER</h2>
+            
+            <div class="summary-box">
+                <span>TOTAL AMOUNT:</span>
+                <span id="total-val">₹ 0</span>
             </div>
+
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="userName" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="userPhone" name="phone" placeholder="Enter mobile number" required>
+                </div>
+                
+                <input type="hidden" id="hiddenItems" name="items">
+                <input type="hidden" id="hiddenTotal" name="total">
+
+                <button type="submit" class="btn" id="submitBtn" style="width: 100%;">SUBMIT ORDER & BOOK TABLE</button>
+            </form>
+            <p id="msg" style="text-align:center; display:none; color: #00ff00; margin-top:15px; font-weight:bold;">Sent successfully!</p>
         </div>
     </section>
 
     <script>
-        function filterMenu(cat) {
-            document.querySelectorAll('.menu-category').forEach(el => {
-                const tags = el.getAttribute('data-cat').split(' ');
-                el.style.display = tags.includes(cat) ? 'block' : 'none';
+        function filter(c) {
+            const sections = document.querySelectorAll('.menu-category');
+            sections.forEach(s => {
+                s.style.display = (c === 'all' || s.getAttribute('data-cat') === c) ? 'block' : 'none';
             });
         }
 
-        function updateSummary() {
+        function calc() {
             let total = 0;
-            let items = [];
-            document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+            let selectedItems = [];
+            document.querySelectorAll('.food-item:checked').forEach(cb => {
                 total += parseInt(cb.getAttribute('data-price'));
-                items.push(cb.getAttribute('data-name'));
+                selectedItems.push(cb.getAttribute('data-name'));
             });
-            document.getElementById('total-display').innerText = `₹ ${total}`;
-            document.getElementById('hidden-total').value = total;
-            document.getElementById('hidden-items').value = items.join(', ');
+            document.getElementById('total-val').innerText = '₹ ' + total;
+            document.getElementById('hiddenTotal').value = total;
+            document.getElementById('hiddenItems').value = selectedItems.join(', ');
         }
 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwniIfPftvq7pxeLXQ1H4ztyPxWrEL7KFb50U5nd-lAjWp_2oaqx_ayP3ZFKQnFETlF/exec'; 
         const form = document.getElementById('orderForm');
+
         form.addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            const msg = document.getElementById('msg');
-            
             btn.disabled = true;
-            msg.style.display = 'block';
+            btn.innerText = "SENDING...";
 
-            fetch(form.action, { method: 'POST', body: new FormData(form)})
-            .then(() => {
-                alert("Success! Your booking has been recorded.");
-                form.reset();
-                updateSummary();
-                btn.disabled = false;
-                msg.style.display = 'none';
-            })
-            .catch(() => {
-                alert("Error sending data. Check your URL or Connection.");
-                btn.disabled = false;
-                msg.style.display = 'none';
-            });
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('msg').style.display = 'block';
+                    form.reset();
+                    document.getElementById('total-val').innerText = '₹ 0';
+                    btn.disabled = false;
+                    btn.innerText = "SUBMIT ORDER & BOOK TABLE";
+                })
+                .catch(error => {
+                    alert('Error! Check your Google Script URL.');
+                    btn.disabled = false;
+                    btn.innerText = "SUBMIT ORDER & BOOK TABLE";
+                });
         });
     </script>
 </body>
