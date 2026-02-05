@@ -14,67 +14,48 @@
 
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--color-dark);
             color: var(--color-text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* --- Header Fixes --- */
         header {
             background-color: var(--color-dark);
-            padding: 20px 5%;
+            padding: 15px 5%;
             border-bottom: 3px solid var(--color-accent);
         }
 
-        nav a {
-            color: var(--color-text-light);
-            text-decoration: none;
-            margin-right: 25px;
-            font-weight: bold;
-            transition: color 0.3s;
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
-        nav a:hover { color: var(--color-accent); }
+        .logo { font-size: 1.5em; font-weight: 900; text-align: center; }
+        .logo span { color: var(--color-accent); font-size: 0.5em; display: block; letter-spacing: 1px; }
 
-        h1, h2, h3 {
-            color: var(--color-text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        nav { display: flex; gap: 15px; }
+        nav a { color: var(--color-text-light); text-decoration: none; font-weight: bold; font-size: 0.9em; }
 
-        .logo { font-size: 2em; font-weight: 900; }
-        .logo span {
-            color: var(--color-accent);
-            font-size: 0.5em;
-            display: block;
-            font-weight: normal;
-            letter-spacing: 1px;
-        }
-
-        section { padding: 50px 5%; margin-bottom: 20px; }
-
+        /* --- Hero Section Fixes --- */
         #home {
-            min-height: 400px;
-            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            min-height: 70vh;
+            padding: 40px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('restaurant_interior.jpg') no-repeat center center/cover;
         }
 
-        #home::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .hero-content { z-index: 1; }
-        .welcome-msg { font-size: 4em; font-weight: 900; text-shadow: 2px 2px 4px #000; }
-        .hero-content h1 { font-size: 3em; color: var(--color-accent); margin: 10px 0; }
-
+        .welcome-msg { font-size: 2.5em; font-weight: 900; }
+        .hero-content h1 { font-size: 1.8em; color: var(--color-accent); margin: 10px 0 20px; }
+        
+        .btn-container { display: flex; flex-direction: column; gap: 15px; align-items: center; }
         .btn {
             background-color: var(--color-accent);
             color: var(--color-dark);
@@ -82,89 +63,75 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            margin: 10px;
-            display: inline-block;
+            width: 200px;
             transition: 0.3s;
             border: none;
             cursor: pointer;
+            text-align: center;
         }
 
-        .btn:hover { background-color: #ffaa33; transform: translateY(-2px); }
-
-        .menu-selection { display: flex; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+        /* --- Menu Filters --- */
+        .menu-selection { 
+            display: flex; 
+            overflow-x: auto; 
+            padding: 10px 5%; 
+            gap: 10px;
+            scrollbar-width: none;
+        }
         .menu-selection label {
-            background-color: var(--color-dark);
-            padding: 10px 20px;
-            margin: 5px;
+            flex: 0 0 auto;
+            background: var(--color-dark);
+            padding: 10px 15px;
             border: 2px solid var(--color-accent);
-            cursor: pointer;
             border-radius: 5px;
-            font-weight: bold;
+            font-size: 0.85em;
+            cursor: pointer;
         }
-
-        .menu-selection input[type="radio"] { display: none; }
         .menu-selection input[type="radio"]:checked + label {
-            background-color: var(--color-accent);
+            background: var(--color-accent);
             color: var(--color-dark);
         }
+        .menu-selection input { display: none; }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .menu-category {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 8px;
-            border-top: 5px solid var(--color-accent);
-        }
-
-        .menu-item-wrapper {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px dotted #444;
-            cursor: pointer;
-        }
-
-        .menu-item-wrapper input[type="checkbox"] {
-            width: 18px; height: 18px; margin-right: 12px;
-            accent-color: var(--color-accent);
-        }
-
-        .item-details { display: flex; justify-content: space-between; flex-grow: 1; }
+        /* --- Menu Content --- */
+        .menu-grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px 5%; }
+        .menu-category { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border-top: 5px solid var(--color-accent); }
+        .menu-item-wrapper { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px dotted #444; }
+        .item-details { display: flex; justify-content: space-between; flex-grow: 1; padding-left: 10px; }
         .item-price { color: var(--color-accent); font-weight: bold; }
 
+        /* --- Sticky Footer --- */
         #order-summary-container {
             position: sticky; bottom: 0;
             background: rgba(0,0,0,0.95);
             border-top: 3px solid var(--color-accent);
-            padding: 15px 5%;
+            padding: 12px 5%;
             z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        #order-summary { display: flex; justify-content: space-between; align-items: center; }
-        #selected-items-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.85em; }
-        #total-price { font-size: 1.5em; color: var(--color-accent); font-weight: bold; }
-
-        .booking-form { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 8px; }
+        /* --- Booking Form --- */
+        .booking-form { padding: 30px 5%; }
+        .form-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #444; background: #222; color: #fff;
-        }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 0.9em; }
+        .form-group input { width: 100%; padding: 12px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px; box-sizing: border-box; }
 
-        footer { background: #000; text-align: center; padding: 40px; color: var(--color-text-gray); font-size: 0.9em; }
-        .fine-print { color: #ff6347; font-size: 0.8em; margin-top: 5px; }
+        /* --- Desktop Queries --- */
+        @media (min-width: 768px) {
+            .header-container { flex-direction: row; justify-content: space-between; }
+            .welcome-msg { font-size: 4em; }
+            .hero-content h1 { font-size: 3em; }
+            .btn-container { flex-direction: row; justify-content: center; }
+            .menu-grid { grid-template-columns: 1fr 1fr; }
+            .menu-selection { justify-content: center; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="header-container">
             <div class="logo">SAYAJI HOTEL<span>BLUE LOTUS</span></div>
             <nav>
                 <a href="#home">Home</a>
@@ -177,203 +144,123 @@
     <section id="home">
         <div class="hero-content">
             <div class="welcome-msg">WELCOME</div>
-            <h1>BLUE LOTUS at Sayaji Hotel</h1>
+            <h1>BLUE LOTUS</h1>
             <p>Experience the finest dining in Kolhapur.</p>
-            <a href="#menu" class="btn">VIEW MENU</a>
-            <a href="#booking" class="btn">BOOK A TABLE</a>
+            <div class="btn-container">
+                <a href="#menu" class="btn">VIEW MENU</a>
+                <a href="#booking" class="btn">BOOK A TABLE</a>
+            </div>
         </div>
     </section>
 
     <section id="menu">
-        <h2>Our Menu</h2>
+        <h2 style="text-align: center; margin-top: 40px;">Our Menu</h2>
         <div class="menu-selection">
-            <input type="radio" id="filter-all" name="menu-filter" value="all" checked onchange="filterMenu('all')">
-            <label for="filter-all">All Menu</label>
-            <input type="radio" id="filter-breakfast" name="menu-filter" value="breakfast" onchange="filterMenu('breakfast')">
-            <label for="filter-breakfast">Breakfast</label>
-            <input type="radio" id="filter-alltime" name="menu-filter" value="alltime" onchange="filterMenu('alltime')">
-            <label for="filter-alltime">Favorites</label>
-            <input type="radio" id="filter-mains" name="menu-filter" value="mains" onchange="filterMenu('mains')">
-            <label for="filter-mains">Indian Mains</label>
+            <input type="radio" id="f-all" name="m-filter" value="all" checked onchange="filterMenu('all')">
+            <label for="f-all">All</label>
+            <input type="radio" id="f-bev" name="m-filter" value="bev" onchange="filterMenu('bev')">
+            <label for="f-bev">Beverages</label>
+            <input type="radio" id="f-main" name="m-filter" value="main" onchange="filterMenu('main')">
+            <label for="f-main">Mains</label>
         </div>
 
-        <div class="menu-grid" id="menu-container">
-            <div class="menu-category" data-category="all">
+        <div class="menu-grid">
+            <div class="menu-category" data-cat="bev all">
                 <h3>Beverages</h3>
                 <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="150" data-name="Tea" onchange="updateOrderSummary()">
+                    <input type="checkbox" data-price="150" data-name="Tea" onchange="updateSummary()">
                     <div class="item-details"><span>Tea</span><span class="item-price">₹ 150</span></div>
                 </label>
                 <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="150" data-name="Coffee" onchange="updateOrderSummary()">
-                    <div class="item-details"><span>Coffee</span><span class="item-price">₹ 150</span></div>
+                    <input type="checkbox" data-price="245" data-name="Milkshake" onchange="updateSummary()">
+                    <div class="item-details"><span>Milkshake</span><span class="item-price">₹ 245</span></div>
                 </label>
             </div>
 
-            <div class="menu-category" data-category="breakfast all">
-                <h3>Breakfast</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="175" data-name="Missal Pav" onchange="updateOrderSummary()">
-                    <div class="item-details"><span>Missal Pav</span><span class="item-price">₹ 175</span></div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="265" data-name="Eggs to Order" onchange="updateOrderSummary()">
-                    <div class="item-details"><span>Eggs to Order</span><span class="item-price">₹ 265</span></div>
-                </label>
-            </div>
-
-            <div class="menu-category" data-category="alltime all">
-                <h3>All Time Favorites</h3>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="365" data-name="Chicken Burger" onchange="updateOrderSummary()">
-                    <div class="item-details"><span>Chicken Burger</span><span class="item-price">₹ 365</span></div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="195" data-name="French Fries" onchange="updateOrderSummary()">
-                    <div class="item-details"><span>French Fries</span><span class="item-price">₹ 195</span></div>
-                </label>
-            </div>
-
-            <div class="menu-category" data-category="mains all">
+            <div class="menu-category" data-cat="main all">
                 <h3>Indian Mains</h3>
                 <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="565" data-name="Butter Chicken" onchange="updateOrderSummary()">
+                    <input type="checkbox" data-price="565" data-name="Butter Chicken" onchange="updateSummary()">
                     <div class="item-details"><span>Butter Chicken</span><span class="item-price">₹ 565</span></div>
-                </label>
-                <label class="menu-item-wrapper">
-                    <input type="checkbox" name="menu_item" data-price="565" data-name="Murgh Dum Biryani" onchange="updateOrderSummary()">
-                    <div class="item-details"><span>Murgh Dum Biryani</span><span class="item-price">₹ 565</span></div>
                 </label>
             </div>
         </div>
     </section>
 
     <div id="order-summary-container">
-        <div id="order-summary">
-            <div>
-                <h4 style="margin:0; color:var(--color-accent);">Order Preview:</h4>
-                <ul id="selected-items-list"><li>No items selected.</li></ul>
-            </div>
-            <div>
-                <span>TOTAL: </span><span id="total-price">₹ 0</span>
-            </div>
-        </div>
+        <span style="font-weight: bold; color: var(--color-accent);">Total Price:</span>
+        <span id="total-display" style="font-size: 1.3em; font-weight: bold;">₹ 0</span>
     </div>
 
     <section id="booking">
-        <h2>Reserve Your Table</h2>
+        <h2 style="text-align: center;">Book Your Table</h2>
         <div class="booking-form">
-            <form id="google-sheet-form" action="https://script.google.com/macros/s/AKfycbyteIo3zNTT9aM3HNsMiu6esEWxkbLplciI_NBoARnlek990FN5Y0JLNkqW3vyoLLXY/exec" method="POST">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label>Party Size</label>
-                    <select name="party-size">
-                        <option value="1">1 Person</option>
-                        <option value="2" selected>2 People</option>
-                        <option value="4">4 People</option>
-                        <option value="5+">5+ People</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label>Time</label>
-                    <select name="time">
-                        <option value="12:30 PM">12:30 PM (Lunch)</option>
-                        <option value="07:30 PM">07:30 PM (Dinner)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Special Requests</label>
-                    <textarea name="notes" rows="2"></textarea>
-                </div>
+            <div class="form-card">
+                <form id="orderForm" action="https://script.google.com/macros/s/AKfycbyteIo3zNTT9aM3HNsMiu6esEWxkbLplciI_NBoARnlek990FN5Y0JLNkqW3vyoLLXY/exec" method="POST">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Booking</label>
+                        <input type="date" name="date" required>
+                    </div>
 
-                <input type="hidden" id="hidden-total" name="total_price">
-                <input type="hidden" id="hidden-items" name="items">
+                    <input type="hidden" id="hidden-total" name="total_price">
+                    <input type="hidden" id="hidden-items" name="items">
 
-                <button type="submit" class="btn" id="submit-btn" style="width: 100%;">CONFIRM RESERVATION & ORDER</button>
-            </form>
-            <div id="success-msg" style="display:none; color: #00ff00; text-align: center; margin-top: 15px; font-weight: bold;">
-                Reservation Sent! We'll see you soon.
+                    <button type="submit" class="btn" id="submitBtn" style="width: 100%;">CONFIRM ORDER</button>
+                </form>
+                <p id="msg" style="display:none; text-align:center; color: #ff8c00; margin-top: 15px; font-weight: bold;">Sending to Sheet...</p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>SAYAJI HOTEL | BLUE LOTUS Restaurant</p>
-        <p>&copy; 2026 Sayaji Hotel. All rights reserved.</p>
-    </footer>
-
     <script>
-        function filterMenu(category) {
-            const categories = document.querySelectorAll('.menu-category');
-            categories.forEach(cat => {
-                const tags = cat.getAttribute('data-category').split(' ');
-                cat.style.display = (category === 'all' || tags.includes(category)) ? 'block' : 'none';
+        function filterMenu(cat) {
+            document.querySelectorAll('.menu-category').forEach(el => {
+                const tags = el.getAttribute('data-cat').split(' ');
+                el.style.display = tags.includes(cat) ? 'block' : 'none';
             });
         }
 
-        function updateOrderSummary() {
-            const checkboxes = document.querySelectorAll('input[name="menu_item"]:checked');
+        function updateSummary() {
             let total = 0;
             let items = [];
-            const list = document.getElementById('selected-items-list');
-            list.innerHTML = '';
-
-            if (checkboxes.length === 0) {
-                list.innerHTML = '<li>No items selected.</li>';
-            } else {
-                checkboxes.forEach(cb => {
-                    const price = parseInt(cb.getAttribute('data-price'));
-                    const name = cb.getAttribute('data-name');
-                    total += price;
-                    items.push(name);
-                    const li = document.createElement('li');
-                    li.textContent = name;
-                    list.appendChild(li);
-                });
-            }
-
-            document.getElementById('total-price').textContent = `₹ ${total}`;
-            // Update hidden fields for the Google Sheet
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                total += parseInt(cb.getAttribute('data-price'));
+                items.push(cb.getAttribute('data-name'));
+            });
+            document.getElementById('total-display').innerText = `₹ ${total}`;
             document.getElementById('hidden-total').value = total;
             document.getElementById('hidden-items').value = items.join(', ');
         }
 
-        // FORM SUBMISSION LOGIC
-        const form = document.getElementById('google-sheet-form');
+        const form = document.getElementById('orderForm');
         form.addEventListener('submit', e => {
             e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            const success = document.getElementById('success-msg');
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('msg');
             
             btn.disabled = true;
-            btn.innerText = "SENDING...";
+            msg.style.display = 'block';
 
             fetch(form.action, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                btn.style.display = 'none';
-                success.style.display = 'block';
+            .then(() => {
+                alert("Success! Your booking has been recorded.");
                 form.reset();
-                updateOrderSummary();
-            })
-            .catch(error => {
+                updateSummary();
                 btn.disabled = false;
-                btn.innerText = "CONFIRM RESERVATION & ORDER";
-                alert('Error! Please check your internet or App Script URL.');
+                msg.style.display = 'none';
+            })
+            .catch(() => {
+                alert("Error sending data. Check your URL or Connection.");
+                btn.disabled = false;
+                msg.style.display = 'none';
             });
         });
     </script>
